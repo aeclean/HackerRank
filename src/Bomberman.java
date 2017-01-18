@@ -23,23 +23,26 @@ public class Bomberman
         char[][] out = new char[rows][cols];
         for(int step = 1; step <= delay; step++) {
             
-            if(step == 1)
-                continue;
+            if(step == 1 && step == delay) {
+                print(grid);
+                break;
+            }
             
             if(step == 2) {
-                //System.out.println("--- Step 2 ---");
                 for(int i = 0; i < out.length; i++) {
                     for(int j = 0; j < out[i].length; j++) {
-                        out[i][j] = '0';
+                        out[i][j] = 'O';
                     }
-                    //System.out.println(out[i]);
+                }
+
+                if(step == delay) {
+                    print(out);
+                    break;
                 }
             }
             
-            if(step == delay) {
-                //System.out.println("--- Step 3 ---");
+            if(step == 3 && step == delay) {
                 int[] bombs = getPlacedBombs(grid);
-                
                 explodeBombs(grid, out, bombs);
             }
         }
@@ -71,8 +74,6 @@ public class Bomberman
             if((col+1) < cc) {
                 out[row][col+1] = new String(".").charAt(0);
             }
-            
-            //System.out.println(bombs[i]+", row " + row + ", col " + col);
         }
         
         print(out);
